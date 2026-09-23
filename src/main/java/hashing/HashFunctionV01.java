@@ -27,6 +27,7 @@ public final class HashFunctionV01 implements HashFunction {
 
         state[0] ^= input.length;
         state[state.length - 1] += Integer.rotateLeft(input.length, 16);
+        // TODO v0.12: will need to improve avalanche effect here somehwo
 
         return toHex(state);
     }
