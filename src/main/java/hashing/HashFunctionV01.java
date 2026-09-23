@@ -25,5 +25,8 @@ public final class HashFunctionV01 implements HashFunction {
             state[currentIndex] += state[nextIndex];
         }
 
+        state[0] ^= input.length;
+        state[state.length - 1] += Integer.rotateLeft(input.length, 16);
+
         throw new UnsupportedOperationException("not implemented yet");
     }
