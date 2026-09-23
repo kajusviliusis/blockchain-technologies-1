@@ -28,5 +28,16 @@ public final class HashFunctionV01 implements HashFunction {
         state[0] ^= input.length;
         state[state.length - 1] += Integer.rotateLeft(input.length, 16);
 
-        throw new UnsupportedOperationException("not implemented yet");
+        return toHex(state);
     }
+
+    private static String toHex(int[] state) {
+        StringBuilder result = new StringBuilder(state.length * 8);
+
+        for (int value : state) {
+            result.append(String.format("%08x", value));
+        }
+
+        return result.toString();
+    }
+}
