@@ -13,15 +13,13 @@ import java.util.List;
 import java.util.Locale;
 
 /**
- * Implements experiment 4 by measuring hash time for file prefixes containing
- * 1, 2, 4, 8, ... lines and the complete file.
+ * Implements experiment 4 by measuring hash time for file prefixes containing 1, 2, 4, 8, ... lines and the complete
+ * file.
  */
 public final class PerformanceExperiment {
 
-    private static final Path INPUT_FILE = Path.of(
-            "data", "inputs", "konstitucija.txt");
-    private static final Path OUTPUT_FILE = Path.of(
-            "data", "results", "v0.1", "performance.csv");
+    private static final Path INPUT_FILE = Path.of("data", "inputs", "konstitucija.txt");
+    private static final Path OUTPUT_FILE = Path.of("data", "results", "v0.1", "performance.csv");
 
     private static final int WARMUP_COUNT = 2;
     private static final int MEASUREMENT_COUNT = 5;
@@ -33,13 +31,10 @@ public final class PerformanceExperiment {
     }
 
     public static void main(String[] args) throws IOException {
-        PerformanceExperiment experiment = new PerformanceExperiment(
-                new HashFunctionV01());
+        PerformanceExperiment experiment = new PerformanceExperiment(new HashFunctionV01());
 
         int inputCount = experiment.run();
-        System.out.printf(
-                "Performance experiment completed for %d input sizes. Results: %s%n",
-                inputCount,
+        System.out.printf("Performance experiment completed for %d input sizes. Results: %s%n", inputCount,
                 OUTPUT_FILE);
     }
 
@@ -49,10 +44,8 @@ public final class PerformanceExperiment {
 
         warmUp(inputs);
 
-        StringBuilder csv = new StringBuilder(
-                "line_count,byte_count,measurement_1_ns,measurement_2_ns,"
-                        + "measurement_3_ns,measurement_4_ns,measurement_5_ns,"
-                        + "mean_ns,min_ns,max_ns,checksum\n");
+        StringBuilder csv = new StringBuilder("line_count,byte_count,measurement_1_ns,measurement_2_ns,"
+                + "measurement_3_ns,measurement_4_ns,measurement_5_ns," + "mean_ns,min_ns,max_ns,checksum\n");
 
         for (InputSample input : inputs) {
             measure(input, csv);
@@ -96,20 +89,9 @@ public final class PerformanceExperiment {
 
         double mean = (double) sum / MEASUREMENT_COUNT;
 
-        csv.append(String.format(
-                Locale.ROOT,
-                "%d,%d,%d,%d,%d,%d,%d,%.2f,%d,%d,%d%n",
-                input.lineCount(),
-                input.bytes().length,
-                measurements[0],
-                measurements[1],
-                measurements[2],
-                measurements[3],
-                measurements[4],
-                mean,
-                minimum,
-                maximum,
-                checksum));
+        csv.append(String.format(Locale.ROOT, "%d,%d,%d,%d,%d,%d,%d,%.2f,%d,%d,%d%n", input.lineCount(),
+                input.bytes().length, measurements[0], measurements[1], measurements[2], measurements[3],
+                measurements[4], mean, minimum, maximum, checksum));
     }
 
     private static List<InputSample> createInputs(byte[] completeFile) {
@@ -119,9 +101,7 @@ public final class PerformanceExperiment {
 
         for (int lineCount = 1; lineCount < totalLineCount; lineCount *= 2) {
             int byteCount = lineEndPositions.get(lineCount - 1);
-            inputs.add(new InputSample(
-                    lineCount,
-                    Arrays.copyOf(completeFile, byteCount)));
+            inputs.add(new InputSample(lineCount, Arrays.copyOf(completeFile, byteCount)));
         }
 
         inputs.add(new InputSample(totalLineCount, completeFile));
