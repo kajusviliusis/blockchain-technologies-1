@@ -8,8 +8,6 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Locale;
 import java.util.Random;
 
@@ -43,15 +41,16 @@ public final class AvalancheExperiment {
 
     public void run() throws IOException {
         Random random = new Random(RANDOM_SEED);
-        List<LengthResult> lengthResults = new ArrayList<>();
         Statistics combinedStatistics = new Statistics();
+        StringBuilder resultsCsv = new StringBuilder("version,input_length,pair_count,min_bit_percent,max_bit_percent,"
+                + "mean_bit_percent,min_hex_percent,max_hex_percent," + "mean_hex_percent,seed,alphabet\n");
 
         for (int inputLength : INPUT_LENGTHS) {
             Statistics statistics = checkLength(inputLength, random, combinedStatistics);
-            lengthResults.add(new LengthResult(inputLength, statistics));
+            appendResult(resultsCsv, Integer.toString(inputLength), statistics);
         }
 
-        writeResults(lengthResults, combinedStatistics);
+        writeResults(resultsCsv, combinedStatistics);
     }
 
     private Statistics checkLength(int inputLength, Random random, Statistics combinedStatistics) {
@@ -92,15 +91,8 @@ public final class AvalancheExperiment {
         return input;
     }
 
-    private static void writeResults(List<LengthResult> lengthResults, Statistics combinedStatistics)
-            throws IOException {
-        StringBuilder resultsCsv = new StringBuilder("version,input_length,pair_count,min_bit_percent,max_bit_percent,"
-                + "mean_bit_percent,min_hex_percent,max_hex_percent," + "mean_hex_percent,seed,alphabet\n");
+    private static void writeResults(StringBuilder resultsCsv, Statistics combinedStatistics) throws IOException {
         StringBuilder histogramCsv = new StringBuilder("version,input_length,differing_bits,bit_percent,frequency\n");
-
-        for (LengthResult result : lengthResults) {
-            appendResult(resultsCsv, Integer.toString(result.inputLength()), result.statistics());
-        }
 
         appendResult(resultsCsv, "all", combinedStatistics);
         appendHistogram(histogramCsv, combinedStatistics);
@@ -156,6 +148,4 @@ public final class AvalancheExperiment {
         }
     }
 
-    private record LengthResult(int inputLength, Statistics statistics) {
-    }
 }

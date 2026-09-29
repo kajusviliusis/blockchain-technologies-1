@@ -15,19 +15,7 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
- * Tests the basic requirements of the hash function.
- * <p>
- * The tests cover parts of the following assignment experiments:
- * </p>
- * <ul>
- * <li>Experiment 1: empty input and UTF-8 input with non-ASCII characters.</li>
- * <li>Experiment 2: hash length, hex format, and matching text/file input.</li>
- * <li>Experiment 3: deterministic results and no state left between calls.</li>
- * </ul>
- * <p>
- * The full experiments are implemented separately because they also require generated input files, separate program
- * runs, and result collection.
- * </p>
+ * Covers input handling (Experiment 1), output format (Experiment 2) and determinism (Experiment 3).
  */
 class HashFunctionTest {
 
@@ -52,6 +40,15 @@ class HashFunctionTest {
 
         assertEquals(64, hash.length());
         assertTrue(hash.matches("[0-9a-f]{64}"));
+    }
+
+    @Test
+    void retainsLeadingZeroes() {
+        byte[] input = "leading-zero-1005".getBytes(StandardCharsets.UTF_8);
+        String hash = hashFunction.hash(input);
+
+        assertEquals(64, hash.length());
+        assertTrue(hash.startsWith("0"));
     }
 
     @Test

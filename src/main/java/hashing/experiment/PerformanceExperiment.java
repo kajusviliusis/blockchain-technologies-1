@@ -33,12 +33,11 @@ public final class PerformanceExperiment {
     public static void main(String[] args) throws IOException {
         PerformanceExperiment experiment = new PerformanceExperiment(new HashFunctionV01());
 
-        int inputCount = experiment.run();
-        System.out.printf("Performance experiment completed for %d input sizes. Results: %s%n", inputCount,
-                OUTPUT_FILE);
+        experiment.run();
+        System.out.printf("Performance experiment completed. Results: %s%n", OUTPUT_FILE);
     }
 
-    public int run() throws IOException {
+    public void run() throws IOException {
         byte[] completeFile = Files.readAllBytes(INPUT_FILE);
         List<InputSample> inputs = createInputs(completeFile);
 
@@ -53,7 +52,6 @@ public final class PerformanceExperiment {
 
         Files.createDirectories(OUTPUT_FILE.getParent());
         Files.writeString(OUTPUT_FILE, csv, StandardCharsets.UTF_8);
-        return inputs.size();
     }
 
     private void warmUp(List<InputSample> inputs) {

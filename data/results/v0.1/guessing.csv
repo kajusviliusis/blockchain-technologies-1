@@ -1,3 +1,3 @@
-version,mode,target_hash,salt_hex,candidate_count,attempt_count,match_count,matches,elapsed_ns
-v0.1,no_salt,0b6471b18acf0fd561ae61d9b78248280f1e2d3c4b5a697889abcdef10243040,,10000,10000,1,0427,84908792
-v0.1,public_salt,3e09ec606ab9c54d45386cb3347736edf5caae0d33345545aff905e2535212f5,c56fe78ef23846496d371eaeb741604a,10000,10000,1,0427,78014334
+version,mode,target_hash,salt_hex,attempt_count,match_count,matches,elapsed_ns
+v0.1,no_salt,0b6471b18acf0fd561ae61d9b78248280f1e2d3c4b5a697889abcdef10243040,,10000,1,0427,91916292
+v0.1,public_salt,3e09ec606ab9c54d45386cb3347736edf5caae0d33345545aff905e2535212f5,c56fe78ef23846496d371eaeb741604a,10000,1,0427,82664792

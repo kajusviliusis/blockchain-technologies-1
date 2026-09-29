@@ -70,8 +70,8 @@ public final class GuessingExperiment {
         }
         long elapsedNanoseconds = System.nanoTime() - start;
 
-        return new SearchResult(mode, targetHash, HexFormat.of().formatHex(salt), candidates.size(), attemptCount,
-                matches, elapsedNanoseconds);
+        return new SearchResult(mode, targetHash, HexFormat.of().formatHex(salt), attemptCount, matches,
+                elapsedNanoseconds);
     }
 
     private static List<String> createCandidates() {
@@ -98,22 +98,21 @@ public final class GuessingExperiment {
     }
 
     private static void writeResults(List<SearchResult> results) throws IOException {
-        StringBuilder csv = new StringBuilder("version,mode,target_hash,salt_hex,candidate_count,attempt_count,"
-                + "match_count,matches,elapsed_ns\n");
+        StringBuilder csv = new StringBuilder(
+                "version,mode,target_hash,salt_hex,attempt_count,match_count,matches,elapsed_ns\n");
 
         for (SearchResult result : results) {
             csv.append("v0.1,").append(result.mode()).append(',').append(result.targetHash()).append(',')
-                    .append(result.saltHex()).append(',').append(result.candidateCount()).append(',')
-                    .append(result.attemptCount()).append(',').append(result.matches().size()).append(',')
-                    .append(String.join(";", result.matches())).append(',').append(result.elapsedNanoseconds())
-                    .append('\n');
+                    .append(result.saltHex()).append(',').append(result.attemptCount()).append(',')
+                    .append(result.matches().size()).append(',').append(String.join(";", result.matches())).append(',')
+                    .append(result.elapsedNanoseconds()).append('\n');
         }
 
         Files.createDirectories(RESULTS_FILE.getParent());
         Files.writeString(RESULTS_FILE, csv, StandardCharsets.UTF_8);
     }
 
-    private record SearchResult(String mode, String targetHash, String saltHex, int candidateCount, int attemptCount,
-            List<String> matches, long elapsedNanoseconds) {
+    private record SearchResult(String mode, String targetHash, String saltHex, int attemptCount, List<String> matches,
+            long elapsedNanoseconds) {
     }
 }
