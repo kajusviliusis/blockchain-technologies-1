@@ -11,17 +11,8 @@ import java.nio.file.Path;
 import java.util.Arrays;
 
 /**
- * Runs experiment 2 from the assignment.
- *
- * <p>
- * The experiment checks the hash length, hexadecimal format and whether
- * identical text and file bytes produce the same hash.
- * </p>
- *
- * <p>
- * The results are printed to the console and saved to
- * {@code data/results/v0.x/correctness.csv}.
- * </p>
+ * Implements experiment 2 by verifying hash length, hexadecimal format, and
+ * matching hashes for identical text and file bytes.
  */
 public final class CorrectnessExperiment {
 
@@ -55,7 +46,7 @@ public final class CorrectnessExperiment {
                 addResult(csv, "one_byte_b", "file", readFile("one-byte-b.txt"));
                 addResult(csv, "utf8_non_ascii", "file", readFile("utf8-non-ascii.txt"));
 
-        byte[] textBytes = InputLoader.fromText("identical text");
+                byte[] textBytes = InputLoader.fromText("identical text");
                 byte[] fileBytes = readFile("text-without-newline.txt");
 
                 if (!Arrays.equals(textBytes, fileBytes)) {
@@ -72,7 +63,7 @@ public final class CorrectnessExperiment {
 
                 Files.createDirectories(OUTPUT_FILE.getParent());
                 Files.writeString(OUTPUT_FILE, csv, StandardCharsets.UTF_8);
-        return 6;
+                return 6;
         }
 
         private static byte[] readFile(String fileName) throws IOException {
