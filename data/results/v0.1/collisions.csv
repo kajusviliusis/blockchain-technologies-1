@@ -1,0 +1,6 @@
+version,dataset,input_length,pair_count,distinct_input_count,pairwise_collision_count,collision_group_count,seed,alphabet
+v0.1,random,10,100000,200000,0,0,20260924,abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789
+v0.1,random,100,100000,200000,0,0,20260924,abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789
+v0.1,random,500,100000,200000,0,0,20260924,abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789
+v0.1,random,1000,100000,200000,0,0,20260924,abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789
+v0.1,structured,12,2,4,0,0,,
