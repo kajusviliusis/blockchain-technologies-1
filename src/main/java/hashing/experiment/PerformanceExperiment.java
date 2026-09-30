@@ -1,7 +1,6 @@
 package hashing.experiment;
 
 import hashing.HashFunction;
-import hashing.HashFunctionV01;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -19,7 +18,7 @@ import java.util.Locale;
 public final class PerformanceExperiment {
 
     private static final Path INPUT_FILE = Path.of("data", "inputs", "konstitucija.txt");
-    private static final Path OUTPUT_FILE = Path.of("data", "results", "v0.1", "performance.csv");
+    private static final Path OUTPUT_FILE = Path.of("data", "results", "v0.12", "performance.csv");
 
     private static final int WARMUP_COUNT = 2;
     private static final int MEASUREMENT_COUNT = 5;
@@ -28,13 +27,6 @@ public final class PerformanceExperiment {
 
     public PerformanceExperiment(HashFunction hashFunction) {
         this.hashFunction = hashFunction;
-    }
-
-    public static void main(String[] args) throws IOException {
-        PerformanceExperiment experiment = new PerformanceExperiment(new HashFunctionV01());
-
-        experiment.run();
-        System.out.printf("Performance experiment completed. Results: %s%n", OUTPUT_FILE);
     }
 
     public void run() throws IOException {

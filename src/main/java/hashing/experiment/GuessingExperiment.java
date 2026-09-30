@@ -1,7 +1,6 @@
 package hashing.experiment;
 
 import hashing.HashFunction;
-import hashing.HashFunctionV01;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -19,7 +18,7 @@ import java.util.Random;
  */
 public final class GuessingExperiment {
 
-    private static final Path RESULTS_FILE = Path.of("data", "results", "v0.1", "guessing.csv");
+    private static final Path RESULTS_FILE = Path.of("data", "results", "v0.12", "guessing.csv");
 
     private static final String TARGET_INPUT = "0427";
     private static final int CANDIDATE_COUNT = 10_000;
@@ -30,13 +29,6 @@ public final class GuessingExperiment {
 
     public GuessingExperiment(HashFunction hashFunction) {
         this.hashFunction = hashFunction;
-    }
-
-    public static void main(String[] args) throws IOException {
-        GuessingExperiment experiment = new GuessingExperiment(new HashFunctionV01());
-
-        experiment.run();
-        System.out.printf("Guessing experiment completed. Results: %s%n", RESULTS_FILE);
     }
 
     public void run() throws IOException {
@@ -102,7 +94,7 @@ public final class GuessingExperiment {
                 "version,mode,target_hash,salt_hex,attempt_count,match_count,matches,elapsed_ns\n");
 
         for (SearchResult result : results) {
-            csv.append("v0.1,").append(result.mode()).append(',').append(result.targetHash()).append(',')
+            csv.append("v0.12,").append(result.mode()).append(',').append(result.targetHash()).append(',')
                     .append(result.saltHex()).append(',').append(result.attemptCount()).append(',')
                     .append(result.matches().size()).append(',').append(String.join(";", result.matches())).append(',')
                     .append(result.elapsedNanoseconds()).append('\n');

@@ -1,7 +1,6 @@
 package hashing.experiment;
 
 import hashing.HashFunction;
-import hashing.HashFunctionV01;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -20,8 +19,8 @@ import java.util.Set;
  */
 public final class CollisionExperiment {
 
-    private static final Path RESULTS_FILE = Path.of("data", "results", "v0.1", "collisions.csv");
-    private static final Path EXAMPLES_FILE = Path.of("data", "results", "v0.1", "collision-examples.csv");
+    private static final Path RESULTS_FILE = Path.of("data", "results", "v0.12", "collisions.csv");
+    private static final Path EXAMPLES_FILE = Path.of("data", "results", "v0.12", "collision-examples.csv");
 
     private static final long RANDOM_SEED = 20260924L;
     private static final String ALPHABET = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
@@ -33,13 +32,6 @@ public final class CollisionExperiment {
 
     public CollisionExperiment(HashFunction hashFunction) {
         this.hashFunction = hashFunction;
-    }
-
-    public static void main(String[] args) throws IOException {
-        CollisionExperiment experiment = new CollisionExperiment(new HashFunctionV01());
-
-        experiment.run();
-        System.out.printf("Collision experiment completed. Results: %s%n", RESULTS_FILE);
     }
 
     public void run() throws IOException {
@@ -141,7 +133,7 @@ public final class CollisionExperiment {
                 + "pairwise_collision_count,collision_group_count,seed,alphabet\n");
 
         for (CollisionSummary summary : summaries) {
-            summaryCsv.append("v0.1,").append(summary.dataset()).append(',').append(summary.inputLength()).append(',')
+            summaryCsv.append("v0.12,").append(summary.dataset()).append(',').append(summary.inputLength()).append(',')
                     .append(summary.pairCount()).append(',').append(summary.distinctInputCount()).append(',')
                     .append(summary.pairwiseCollisionCount()).append(',').append(summary.collisionGroupCount())
                     .append(',').append(summary.dataset().equals("random") ? RANDOM_SEED : "").append(',')
@@ -151,7 +143,7 @@ public final class CollisionExperiment {
         StringBuilder examplesCsv = new StringBuilder("version,input_length,hash,first_input,second_input\n");
 
         for (CollisionExample example : examples) {
-            examplesCsv.append("v0.1,").append(example.inputLength()).append(',').append(example.hash()).append(',')
+            examplesCsv.append("v0.12,").append(example.inputLength()).append(',').append(example.hash()).append(',')
                     .append(example.firstInput()).append(',').append(example.secondInput()).append('\n');
         }
 
