@@ -1,7 +1,7 @@
 package hashing.experiment;
 
 import hashing.HashFunction;
-import hashing.HashFunctionV012;
+import hashing.HashFunctionV02;
 
 import java.io.IOException;
 
@@ -12,7 +12,7 @@ public final class ExperimentRunner {
     }
 
     public static void main(String[] args) throws IOException {
-        HashFunction hashFunction = new HashFunctionV012();
+        HashFunction hashFunction = new HashFunctionV02();
 
         new PerformanceExperiment(hashFunction).run();
         new CollisionExperiment(hashFunction).run();

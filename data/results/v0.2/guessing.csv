@@ -1,0 +1,3 @@
+version,mode,target_hash,salt_hex,attempt_count,match_count,matches,elapsed_ns
+v0.2,no_salt,cd0742b5a1df4e949d5e2b8cc0ff2f315f5fd7f4c62af4d881fe0d290437625a,,10000,1,0427,3959167
+v0.2,public_salt,7d22c6362eae98fb95fc8c6d3d4f9f71c634a30f44dccfc6c8b4e78be35a7391,c56fe78ef23846496d371eaeb741604a,10000,1,0427,4985209

@@ -15,8 +15,8 @@ import java.util.Random;
  */
 public final class AvalancheExperiment {
 
-    private static final Path RESULTS_FILE = Path.of("data", "results", "v0.12", "avalanche.csv");
-    private static final Path HISTOGRAM_FILE = Path.of("data", "results", "v0.12", "avalanche-histogram.csv");
+    private static final Path RESULTS_FILE = Path.of("data", "results", "v0.2", "avalanche.csv");
+    private static final Path HISTOGRAM_FILE = Path.of("data", "results", "v0.2", "avalanche-histogram.csv");
 
     private static final long RANDOM_SEED = 20260924L;
     private static final String ALPHABET = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
@@ -95,7 +95,7 @@ public final class AvalancheExperiment {
     }
 
     private static void appendResult(StringBuilder csv, String inputLength, Statistics statistics) {
-        csv.append(String.format(Locale.ROOT, "v0.12,%s,%d,%.4f,%.4f,%.4f,%.4f,%.4f,%.4f,%d,%s%n", inputLength,
+        csv.append(String.format(Locale.ROOT, "v0.2,%s,%d,%.4f,%.4f,%.4f,%.4f,%.4f,%.4f,%d,%s%n", inputLength,
                 statistics.count, bitPercent(statistics.minimumBits), bitPercent(statistics.maximumBits),
                 bitPercent(statistics.bitSum / statistics.count), hexPercent(statistics.minimumHexCharacters),
                 hexPercent(statistics.maximumHexCharacters), hexPercent(statistics.hexSum / statistics.count),
@@ -104,7 +104,7 @@ public final class AvalancheExperiment {
 
     private static void appendHistogram(StringBuilder csv, Statistics statistics) {
         for (int differingBits = 0; differingBits <= HASH_BIT_COUNT; differingBits++) {
-            csv.append(String.format(Locale.ROOT, "v0.12,all,%d,%.4f,%d%n", differingBits, bitPercent(differingBits),
+            csv.append(String.format(Locale.ROOT, "v0.2,all,%d,%.4f,%d%n", differingBits, bitPercent(differingBits),
                     statistics.bitFrequencies[differingBits]));
         }
     }

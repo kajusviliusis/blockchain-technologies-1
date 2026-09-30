@@ -18,7 +18,7 @@ import java.util.Locale;
 public final class PerformanceExperiment {
 
     private static final Path INPUT_FILE = Path.of("data", "inputs", "konstitucija.txt");
-    private static final Path OUTPUT_FILE = Path.of("data", "results", "v0.12", "performance.csv");
+    private static final Path OUTPUT_FILE = Path.of("data", "results", "v0.2", "performance.csv");
 
     private static final int WARMUP_COUNT = 2;
     private static final int MEASUREMENT_COUNT = 5;
@@ -35,7 +35,7 @@ public final class PerformanceExperiment {
 
         warmUp(inputs);
 
-        StringBuilder csv = new StringBuilder("line_count,byte_count,measurement_1_ns,measurement_2_ns,"
+        StringBuilder csv = new StringBuilder("version,line_count,byte_count,measurement_1_ns,measurement_2_ns,"
                 + "measurement_3_ns,measurement_4_ns,measurement_5_ns," + "mean_ns,min_ns,max_ns,checksum\n");
 
         for (InputSample input : inputs) {
@@ -79,7 +79,7 @@ public final class PerformanceExperiment {
 
         double mean = (double) sum / MEASUREMENT_COUNT;
 
-        csv.append(String.format(Locale.ROOT, "%d,%d,%d,%d,%d,%d,%d,%.2f,%d,%d,%d%n", input.lineCount(),
+        csv.append(String.format(Locale.ROOT, "v0.2,%d,%d,%d,%d,%d,%d,%d,%.2f,%d,%d,%d%n", input.lineCount(),
                 input.bytes().length, measurements[0], measurements[1], measurements[2], measurements[3],
                 measurements[4], mean, minimum, maximum, checksum));
     }
